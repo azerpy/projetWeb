@@ -21,11 +21,18 @@ export default class UserPanel extends React.Component{
 UserPanel.propTypes = {
     nom: PropTypes.string.isRequired,
     prenom: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired
+    email: isEmail
 }
 
 UserPanel.defaultProps = {
     nom : 'Py',
     prenom: 'Jonathan',
     email: 'pyjonathan31@gmail.com'
+}
+
+function isEmail(props, propName, componentName) {
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(props[propName]))
+    {
+        return new Error('Email non valide');
+    }  
 }
