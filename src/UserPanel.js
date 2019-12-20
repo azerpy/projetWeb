@@ -1,6 +1,6 @@
 import React from 'react'; 
 import PropTypes from 'prop-types'; 
-import md5 from 'js-md5';
+var md5 = require('js-md5')
 
 export default class UserPanel extends React.Component{
 
@@ -9,12 +9,15 @@ export default class UserPanel extends React.Component{
     }
 
     render(){ 	
-        var nom = React.createElement('h2', {className:"card-title"}, this.props.nom);
-        var prenom = React.createElement('p', {className:"card-text"}, this.props.prenom);
-        var divClassBody = React.createElement('div', {className:'card-body'}, nom, prenom);
-        var img = React.createElement('img', {className:"card-img-top", src : 'https://www.gravatar.com/avatar/'+md5(this.props.email)});
-        
-        return React.createElement('div', {className:"card", style : {width:"18rem"}}, img, divClassBody);
+        return (
+            <div className={"card"} style={{width: "18rem"}}>
+                <img className={"card-img-top"} src={"https://www.gravatar.com/avatar/"+md5(this.props.email)}/>
+                <div className={"card-body"}>
+                    <h5 className={"card-title"}>{this.props.nom}</h5>
+                    <p className={"card-text"}>{this.props.prenom}</p> 
+                </div>
+            </div>
+        )
     }
 }
 
